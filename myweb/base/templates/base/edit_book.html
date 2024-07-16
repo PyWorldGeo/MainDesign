@@ -1,0 +1,49 @@
+<!--{% extends 'main.html' %}-->
+
+<!--{% block content %}-->
+<!--    <form class="form" action="" method="POST" enctype="multipart/form-data">-->
+<!--        {%csrf_token%}-->
+<!--        <div class="form__group">-->
+<!--          <label>Book Title</label>-->
+<!--            <br>-->
+<!--          <input type="text" name="name">-->
+<!--        </div>-->
+
+
+<!--       <div class="form__group">-->
+<!--          <label for="book_author">Author</label>-->
+<!--           <br>-->
+<!--          <input required type="text" name="author" list="author-list" value="{{book.author.name}}">-->
+<!--          <datalist id="author-list">-->
+<!--            {% for author in authors %}-->
+<!--              <select id="book_author">-->
+<!--                <option value="{{ author.name }}">{{author.name}}</option>-->
+<!--              </select>-->
+<!--            {% endfor %}-->
+<!--          </datalist>-->
+<!--        </div>-->
+
+<!--        <div class="form__group">-->
+<!--          <label for="book_genre">Genre</label>-->
+<!--            <br>-->
+<!--          <input required type="text" name="genre" list="genre-list" value="{{book.genre.all}}">-->
+<!--          <datalist id="genre-list">-->
+<!--            {% for genre in genres %}-->
+<!--              <select id="book_genre">-->
+<!--                <option value="{{genre.name}}">{{genre.name}}</option>-->
+<!--              </select>-->
+<!--            {% endfor %}-->
+<!--          </datalist>-->
+<!--        </div>-->
+
+<!--        <div class="form__group">-->
+<!--          <label>Book Description</label>-->
+<!--            <br>-->
+<!--          {{form.description}}-->
+<!--        </div>-->
+
+<!--        <input type="submit" value="Edit">-->
+<!--    </form>-->
+
+
+<!--{% endblock %}-->

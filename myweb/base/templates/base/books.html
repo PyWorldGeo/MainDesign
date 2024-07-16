@@ -1,0 +1,65 @@
+    <style>
+        .home-container {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+        }
+
+        .genres {
+            margin: 50px 30px;
+        }
+
+
+        .row{
+            display: flex;
+            flex-direction: row;
+          }
+
+    </style>
+
+
+    <div class="home-container">
+        <div class="genres">
+            <h4>Genres:</h4>
+            <br>
+
+            <a href="{{ request.path }}" class="active">All {{ genre.count }}</a>
+
+            {% for genre in genres %}
+                <hr>
+                <a href="{{ request.path }}?q={{ genre.name }}">{{ genre.name }}<span>{{genre.books_set.all.count}}</span></a>
+
+            {% endfor %}
+        </div>
+        <div>
+            <br>
+            <div class="object">
+                <h1 class="main" id="new">{{ heading }}:</h1>
+            </div>
+            <a href="{% url 'add' %}">Add Book</a>
+            <br>
+            <div class="row">
+                {% for book in books %}
+                    <div class="card" style="width: 14rem; margin: 30px 30px;">
+                      <img  src="{{ book.picture.url }}" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">{{book.name}}</h5>
+                        <p class="card-text">{{book.description |slice:":30"}}</p>
+                        <a href="{% url 'reading' book.id %}" target=”_blank” class="btn btn-primary">Read</a>
+                        {% if request.user.is_authenticated %}
+                            {% if book in request.user.books.all %}
+                                <a href="{% url 'delete' book.id %}" target=”_blank” class="btn btn-primary">Delete Relationship</a>
+                            {% else %}
+                                <a href="{% url 'adding' book.id %}" target=”_blank” class="btn btn-primary">Add</a>
+                            {% endif %}
+                            {% if request.user == book.creator %}
+                                <a href="{% url 'delete_book' book.id %}" target=”_blank” class="btn btn-primary">Delete Book</a>
+                            {% endif %}
+
+
+                        {% endif %}
+                      </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
