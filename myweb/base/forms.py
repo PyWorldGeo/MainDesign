@@ -17,6 +17,7 @@ class MyUserCreationForm(UserCreationForm):
         fields = ['username', 'password1', 'password2']
 
 
+
 class BookForm(ModelForm):
 
     class Meta:
