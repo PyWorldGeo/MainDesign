@@ -1,60 +1,87 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <form class="form" action="" method="POST" enctype="multipart/form-data">
-        {%csrf_token%}
-        <div class="form__group">
-          <label>Book Cover</label>
-            <br>
-          {{form.picture}}
-        </div>
-        <div class="form__group">
-          <label>Book Title</label>
-            <br>
-          <input type="text" name="name">
-        </div>
+    <main class="auth layout">
+          <div class="container">
+            <div class="layout__box">
+              <div class="layout__boxHeader">
+                <div class="layout__boxTitle">
+                  <h3>Add Book</h3>
+                </div>
+              </div>
+              <div class="layout__body">
+
+                <form class="form" method="POST" action="">
+                  {% csrf_token %}
+                  <div class="form__group form__group">
+                    <label>Book Cover</label>
+                    {{ form.picture }}
+                  </div>
+
+                  <div class="form__group form__group">
+                    <label>Book Title</label>
+                    {{ form.name }}
+                  </div>
+
+                  <div class="form__group form__group">
+                    <label>Author</label>
+                    <input required type="text" name="author" list="author-list" value="{{book.author.name}}">
+                      <datalist id="author-list">
+                        {% for author in authors %}
+                          <select id="book_author">
+                            <option value="{{ author.name }}">{{author.name}}</option>
+                          </select>
+                        {% endfor %}
+              </datalist>
+                  </div>
+
+                   <div class="form__group form__group">
+                    <label>Genre</label>
+                    <input required type="text" name="genre" list="genre-list" value="{{book.genre.all}}">
+                      <datalist id="genre-list">
+                        {% for genre in genres %}
+                          <select id="book_genre">
+                            <option value="{{genre.name}}">{{genre.name}}</option>
+                          </select>
+                        {% endfor %}
+                      </datalist>
+                  </div>
+
+                  <div class="form__group form__group">
+                    <label>Book Description</label>
+                    {{ form.description }}
+                  </div>
+
+                  <div class="form__group form__group">
+                    <label>PDF File</label>
+                    {{ form.file }}
+                  </div>
 
 
-       <div class="form__group">
-          <label for="book_author">Author</label>
-           <br>
-          <input required type="text" name="author" list="author-list" value="{{book.author.name}}">
-          <datalist id="author-list">
-            {% for author in authors %}
-              <select id="book_author">
-                <option value="{{ author.name }}">{{author.name}}</option>
-              </select>
-            {% endfor %}
-          </datalist>
-        </div>
+                  <button class="btn btn--main" type="submit">
+                    <svg
+                      version="1.1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 32 32"
+                    >
+                      <title>lock</title>
+                      <path
+                        d="M27 12h-1v-2c0-5.514-4.486-10-10-10s-10 4.486-10 10v2h-1c-0.553 0-1 0.447-1 1v18c0 0.553 0.447 1 1 1h22c0.553 0 1-0.447 1-1v-18c0-0.553-0.447-1-1-1zM8 10c0-4.411 3.589-8 8-8s8 3.589 8 8v2h-16v-2zM26 30h-20v-16h20v16z"
+                      ></path>
+                      <path
+                        d="M15 21.694v4.306h2v-4.306c0.587-0.348 1-0.961 1-1.694 0-1.105-0.895-2-2-2s-2 0.895-2 2c0 0.732 0.413 1.345 1 1.694z"
+                      ></path>
+                    </svg>
 
-        <div class="form__group">
-          <label for="book_genre">Genre</label>
-            <br>
-          <input required type="text" name="genre" list="genre-list" value="{{book.genre.all}}">
-          <datalist id="genre-list">
-            {% for genre in genres %}
-              <select id="book_genre">
-                <option value="{{genre.name}}">{{genre.name}}</option>
-              </select>
-            {% endfor %}
-          </datalist>
-        </div>
+                    Add
+                  </button>
+                </form>
 
-        <div class="form__group">
-          <label>Book Description</label>
-            <br>
-          {{form.description}}
-        </div>
-
-        <div class="form__group">
-          <label>PDF File</label>
-            <br>
-          {{form.file}}
-        </div>
-
-        <input type="submit" value="Upload">
-    </form>
-
+              </div>
+            </div>
+          </div>
+        </main>
 
 {% endblock %}
