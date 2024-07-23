@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Book, User, Author, Genre, Comment
+from .models import Book, User, Author, Genre, Comment, Video
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import MyUserCreationForm, BookForm, UserForm
+from .forms import MyUserCreationForm, BookForm, UserForm, VideoForm
 from .seeder import seeder_func
 from django.contrib import messages
 
@@ -182,3 +182,23 @@ def delete_comment(request, id):
         comment.delete()
         return redirect('reading', book.id)
     return render(request, 'base/delete.html', {'obj': comment})
+
+
+def add_video(request):
+    form = VideoForm()
+    if request.method == "POST":
+        form = VideoForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        else:
+            messages.error(request, "Something Went Wrong!")
+
+    return render(request, 'base/add_video.html', {'form': form})
+
+#pip install django-embed-video
+
+def playing(request, id):
+    video = Video.objects.get(id=id)
+    return render(request, 'base/play.html', {'video': video})

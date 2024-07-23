@@ -15,5 +15,7 @@ urlpatterns = [
     path('add/', views.add_book, name='add'),
     path('delete_book/<str:id>/', views.delete_book, name='delete_book'),
     path('update-user/', views.update_user, name='update-user'),
-    path('delete_comment/<str:id>/', views.delete_comment, name='delete_comment')
+    path('delete_comment/<str:id>/', views.delete_comment, name='delete_comment'),
+    path('add_video/', views.add_video, name='add_video'),
+    path('play/<str:id>/', views.playing, name='play')
 ]

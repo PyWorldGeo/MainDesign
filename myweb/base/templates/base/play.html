@@ -1,0 +1,10 @@
+{% extends 'main.html'%}
+
+{% block title %}
+    <title>Video Page</title>
+    {% load embed_video_tags %}
+{% endblock %}
+
+{%block content%}
+    {% video video.file 'small' %}
+{% endblock %}

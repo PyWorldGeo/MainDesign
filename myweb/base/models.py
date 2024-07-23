@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 # from django.core.exceptions import ValidationError
-
+from embed_video.fields import EmbedVideoField
 
 class Author(models.Model):
     name = models.CharField(max_length=200)
@@ -64,3 +64,17 @@ class Animal(models.Model):
 
 #py manage.py test
 #py manage.py test --pattern="tests.py"
+
+
+class Video(models.Model):
+    creator = models.ForeignKey('User', on_delete=models.SET("Unknown User"))
+    name = models.CharField(max_length=200)
+    description = models.TextField(max_length=1000)
+    file = EmbedVideoField(null=True)
+    created = models.DateTimeField(auto_now_add=True)  # when created
+
+    class Meta:
+        ordering = ['-name']
+
+    def __str__(self):
+        return self.name

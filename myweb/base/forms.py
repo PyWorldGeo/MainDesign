@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, Book
+from .models import User, Book, Video
 from django.forms import ModelForm
 from django import forms
 
@@ -28,3 +28,13 @@ class UserForm(ModelForm):
     class Meta:
         model = User
         fields = ['avatar', 'username', 'email', 'bio', 'books']
+
+
+
+class VideoForm(ModelForm):
+
+    class Meta:
+        model = Video
+        fields = '__all__'
+
+
